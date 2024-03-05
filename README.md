@@ -1,6 +1,6 @@
 # WDM: 3D Wavelet Diffusion Models for High-Resolution Medical Image Synthesis
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![arXiv](https://img.shields.io/badge/arXiv-2303.08061-b31b1b.svg)](https://arxiv.org/abs/2402.19043)
+[![arXiv](https://img.shields.io/badge/arXiv-2402.19043-b31b1b.svg)](https://arxiv.org/abs/2402.19043)
 
 This is the official PyTorch implementation of the paper **WDM: 3D Wavelet Diffusion Models for High-Resolution Medical Image Synthesis** by [Paul Friedrich](https://pfriedri.github.io/), [Julia Wolleb](https://dbe.unibas.ch/en/persons/julia-wolleb/), [Florentin Bieder](https://dbe.unibas.ch/en/persons/florentin-bieder/), [Alicia Durrer](https://dbe.unibas.ch/en/persons/alicia-durrer/) and [Philippe C. Cattin](https://dbe.unibas.ch/en/persons/philippe-claude-cattin/).
 
