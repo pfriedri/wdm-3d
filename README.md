@@ -82,8 +82,13 @@ python utils/preproc_lidc-idri.py --dicom_dir DICOM_PATH --nifti_dir NIFTI_PATH
 * **2.5D-LDM**: For implementing the paper [Make-A-Volume: Leveraging Latent Diffusion Models for Cross-Modality 3D Brain MRI Synthesis](https://link.springer.com/chapter/10.1007/978-3-031-43999-5_56), we adopted the method to work for image generation. We trained a VQ-VAE (downsampling factor 4, latent dimension 32) using an implementation from [MONAI Generative](https://github.com/Project-MONAI/GenerativeModels) and a diffusion model implementation from [OpenAI](https://github.com/openai/guided-diffusion). For implementing the pseudo 3D layers, we use a script provided by the authors. To allow for image generation, we sample all slices at once - meaning that the models batch size and the dimension of the 1D convolution is equal to the number of slices in the volume to be generated.
 * **3D DDPM**: For implementing a memory efficient baseline model, we use the 3D DDPM presented in the paper [Memory-Efficient 3D Denoising Diffusion Models for Medical Image Processing](https://openreview.net/forum?id=neXqIGpO-tn), and used the publicly available [implementation](https://github.com/FlorentinBieder/PatchDDM-3D). We use additive skip connections and train the model with the same hyperparameters as our models.
 
-All experiments were performed on a system an AMD Epyc 7742 CPU and a NVIDIA A100 (40GB) GPU.
+All experiments were performed on a system with an AMD Epyc 7742 CPU and a NVIDIA A100 (40GB) GPU.
 
+## TODOs
+We plan to add further functionality to our framework:
+- [ ] Add compatibility for more datasets like MRNet, ADNI, or fastMRI
+- [ ] Extend the framework for 3D image inpainting
+- [ ] Extend the framework for 3D image-to-image translation
 
 ## Acknowledgements
 Our code is based on / inspired by the following repositories:
