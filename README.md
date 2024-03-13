@@ -1,5 +1,6 @@
 # WDM: 3D Wavelet Diffusion Models for High-Resolution Medical Image Synthesis
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Static Badge](https://img.shields.io/badge/Project-page-blue)](https://pfriedri.github.io/wdm-3d-io/)
 [![arXiv](https://img.shields.io/badge/arXiv-2402.19043-b31b1b.svg)](https://arxiv.org/abs/2402.19043)
 
 This is the official PyTorch implementation of the paper **WDM: 3D Wavelet Diffusion Models for High-Resolution Medical Image Synthesis** by [Paul Friedrich](https://pfriedri.github.io/), [Julia Wolleb](https://dbe.unibas.ch/en/persons/julia-wolleb/), [Florentin Bieder](https://dbe.unibas.ch/en/persons/florentin-bieder/), [Alicia Durrer](https://dbe.unibas.ch/en/persons/alicia-durrer/) and [Philippe C. Cattin](https://dbe.unibas.ch/en/persons/philippe-claude-cattin/).
@@ -87,6 +88,7 @@ All experiments were performed on a system with an AMD Epyc 7742 CPU and a NVIDI
 ## TODOs
 We plan to add further functionality to our framework:
 - [ ] Add compatibility for more datasets like MRNet, ADNI, or fastMRI
+- [ ] Release pre-trained models
 - [ ] Extend the framework for 3D image inpainting
 - [ ] Extend the framework for 3D image-to-image translation
 
