@@ -45,6 +45,13 @@ MODEL: `'ours_unet_128'`, `'ours_unet_256'`, `'ours_wnet_128'`, `'ours_wnet_256'
 
 DATASET: `'brats'`, `'lidc-idri'`
 
+## Pretrained Models
+We released pretrained models on [HuggingFace](https://huggingface.co/pfriedri/wdm-3d).
+
+Currently available models:
+- [BraTS 128](https://huggingface.co/pfriedri/wdm-3d/blob/main/brats_unet_128_1200k.pt): BraTS, 128 x 128 x 128, U-Net backbone, 1.2M Iterations
+- [LIDC-IDRI 128](https://huggingface.co/pfriedri/wdm-3d/blob/main/lidc-idri_unet_128_1200k.pt): LIDC-IDRI, 128 x 128 x 128, U-Net backbone, 1.2M Iterations 
+
 ## Data
 To ensure good reproducibility, we trained and evaluated our network on two publicly available datasets:
 * **BRATS 2023: Adult Glioma**, a dataset containing routine clinically-acquired, multi-site multiparametric magnetic resonance imaging (MRI) scans of brain tumor patients. We just used the T1-weighted images for training. The data is available [here](https://www.synapse.org/#!Synapse:syn51514105).
@@ -88,7 +95,7 @@ All experiments were performed on a system with an AMD Epyc 7742 CPU and a NVIDI
 ## TODOs
 We plan to add further functionality to our framework:
 - [ ] Add compatibility for more datasets like MRNet, ADNI, or fastMRI
-- [ ] Release pre-trained models
+- [x] Release pre-trained models
 - [ ] Extend the framework for 3D image inpainting
 - [ ] Extend the framework for 3D image-to-image translation
 
