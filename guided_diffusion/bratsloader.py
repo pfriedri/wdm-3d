@@ -31,40 +31,55 @@ class BRATSVolumes(torch.utils.data.Dataset):
         self.seqtypes_set = set(self.seqtypes)
         self.database = []
 
-        for root, dirs, files in os.walk(self.directory):
-            # if there are no subdirs, we have a datadir
-            if not dirs:
-                files.sort()
-                datapoint = dict()
-                # extract all files as channels
+        if not self.mode == 'fake': # Used during training and for evaluating real data
+            for root, dirs, files in os.walk(self.directory):
+                # if there are no subdirs, we have a datadir
+                if not dirs:
+                    files.sort()
+                    datapoint = dict()
+                    # extract all files as channels
+                    for f in files:
+                        seqtype = f.split('-')[4].split('.')[0]
+                        datapoint[seqtype] = os.path.join(root, f)
+                    self.database.append(datapoint)
+        else:   # Used for evaluating fake data
+            for root, dirs, files in os.walk(self.directory):
                 for f in files:
-                    seqtype = f.split('-')[4].split('.')[0]
-                    datapoint[seqtype] = os.path.join(root, f)
-                self.database.append(datapoint)
+                    datapoint = dict()
+                    datapoint['t1n'] = os.path.join(root, f)
+                    self.database.append(datapoint)
 
     def __getitem__(self, x):
         filedict = self.database[x]
-        nib_img = nibabel.load(filedict['t1n'])  # We only use t1 weighted images
+        name = filedict['t1n']
+        nib_img = nibabel.load(name)  # We only use t1 weighted images
         out = nib_img.get_fdata()
 
-        # CLip and normalize the images
-        out_clipped = np.clip(out, np.quantile(out, 0.001), np.quantile(out, 0.999))
-        out_normalized = (out_clipped - np.min(out_clipped)) / (np.max(out_clipped) - np.min(out_clipped))
-        out = torch.tensor(out_normalized)
+        if not self.mode == 'fake':
+            # CLip and normalize the images
+            out_clipped = np.clip(out, np.quantile(out, 0.001), np.quantile(out, 0.999))
+            out_normalized = (out_clipped - np.min(out_clipped)) / (np.max(out_clipped) - np.min(out_clipped))
+            out = torch.tensor(out_normalized)
 
-        # Zero pad images
-        image = torch.zeros(1, 256, 256, 256)
-        image[:, 8:-8, 8:-8, 50:-51] = out
+            # Zero pad images
+            image = torch.zeros(1, 256, 256, 256)
+            image[:, 8:-8, 8:-8, 50:-51] = out
 
-        # Downsampling
-        if self.img_size == 128:
-            downsample = nn.AvgPool3d(kernel_size=2, stride=2)
-            image = downsample(image)
+            # Downsampling
+            if self.img_size == 128:
+                downsample = nn.AvgPool3d(kernel_size=2, stride=2)
+                image = downsample(image)
+        else:
+            image = torch.tensor(out, dtype=torch.float32)
+            image = image.unsqueeze(dim=0)
 
         # Normalization
         image = self.normalize(image)
 
-        return image
+        if self.mode == 'fake':
+            return image, name
+        else:
+            return image
 
     def __len__(self):
         return len(self.database)

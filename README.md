@@ -84,6 +84,34 @@ We provide a script for preprocessing LIDC-IDRI. Simply run the following comman
 python utils/preproc_lidc-idri.py --dicom_dir DICOM_PATH --nifti_dir NIFTI_PATH
 ```
 
+## Evaluation
+As our code for evaluating the model performance has slightly different dependencies, we provide a second .yml file to set up the evaluation environment.
+Simply use the following command to create and activate the new environment:
+```sh
+mamba env create -f eval/eval_environment.yml
+mamba activate eval
+```
+### FID
+For computing the FID score, you need to specify the following variables and use them in the command below:
+* DATASET: `brats` or `lidc-idri`
+* IMG_SIZE: `128` or `256`
+* REAL_DATA_DIR: path to your real data
+* FAKE_DATA_DIR: path to your generated/ fake data
+* PATH_TO_FEATURE_EXTRACTOR: path to the feature extractor weights, e.g. `./eval/pretrained/resnet_50_23dataset.pt`
+* PATH_TO_ACTIVATIONS: path to the location where you want to save mus and sigmas (in case you want to reuse them), e.g. `./eval/activations/` 
+* GPU_ID: gpu you want to use, e.g. `0`
+```sh
+python eval/fid.py --dataset DATASET --img_size IMG_SIZE --data_root_real REAL_DATA_DIR --data_root_fake FAKE_DATA_DIR --pretrain_path PATH_TO_FEATURE_EXTRACTOR --path_to_activations PATH_TO_ACTIVATIONS --gpu_id GPU_ID
+```
+### Mean MS-SSIM
+For computing the mean MS-SSIM, you need to specify the following variables and use them in the command below:
+* DATASET: `brats` or `lidc-idri`
+* IMG_SIZE: `128` or `256`
+* SAMPLE_DIR: path to the generated (or real) data
+
+```sh
+python eval/ms_ssim.py --dataset DATASET --img_size IMG_SIZE --sample_dir SAMPLE_DIR
+```
 ## Implementation Details for Comparing Methods
 * **HA-GAN**: For implementing the paper [Hierarchical Amortized GAN for 3D High Resolution Medical Image Synthesis](https://ieeexplore.ieee.org/abstract/document/9770375), we use the publicly available [implementation](https://github.com/batmanlab/HA-GAN). We follow the implementation details presented in the original paper (Section E). The authors recommend cutting all zero slices from the volumes before training. To allow a fair comparison with other methods, we have omitted this step.
 * **3D-LDM**: For implementing the paper [Denoising Diffusion Probabilistic Models for 3D Medical Image Generation](https://www.nature.com/articles/s41598-023-34341-2), we use the publicly available [implementation](https://github.com/FirasGit/medicaldiffusion). We follow the implementation details presented in the Supplementary Material of the original paper (Supplementary Table 1).

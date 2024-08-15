@@ -98,7 +98,7 @@ TRAIN="
 --use_fp16=False
 --lr=1e-5
 --save_interval=100000
---num_workers=12
+--num_workers=24
 --devices=${GPU}
 "
 SAMPLE="
