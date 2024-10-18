@@ -8,11 +8,13 @@ This is the official PyTorch implementation of the paper **WDM: 3D Wavelet Diffu
 
 If you find our work useful, please consider to :star: **star this repository** and :memo: **cite our paper**:
 ```bibtex
-@article{friedrich2024wdm,
-         title={WDM: 3D Wavelet Diffusion Models for High-Resolution Medical Image Synthesis},
-         author={Paul Friedrich and Julia Wolleb and Florentin Bieder and Alicia Durrer and Philippe C. Cattin},
-         year={2024},
-         journal={arXiv preprint arXiv:2402.19043}}
+@inproceedings{friedrich2024wdm,
+               title={Wdm: 3d wavelet diffusion models for high-resolution medical image synthesis},
+               author={Friedrich, Paul and Wolleb, Julia and Bieder, Florentin and Durrer, Alicia and Cattin, Philippe C},
+               booktitle={MICCAI Workshop on Deep Generative Models},
+               pages={11--21},
+               year={2024},
+               organization={Springer}}
 ```
 
 ## Paper Abstract
@@ -44,6 +46,9 @@ MODE: `'training'`, `'sampling'`
 MODEL: `'ours_unet_128'`, `'ours_unet_256'`, `'ours_wnet_128'`, `'ours_wnet_256'`
 
 DATASET: `'brats'`, `'lidc-idri'`
+
+## Conditional Image Synthesis / Image-to-Image Translation 
+To use WDM for conditional image synthesis or paired image-to-image translation check out our repository [pfriedri/cwdm](https://github.com/pfriedri/cwdm) that implements our paper **cWDM: Conditional Wavelet Diffusion Models for Cross-Modality 3D Medical Image Synthesis**.
 
 ## Pretrained Models
 We released pretrained models on [HuggingFace](https://huggingface.co/pfriedri/wdm-3d).
@@ -125,7 +130,7 @@ We plan to add further functionality to our framework:
 - [ ] Add compatibility for more datasets like MRNet, ADNI, or fastMRI
 - [x] Release pre-trained models
 - [ ] Extend the framework for 3D image inpainting
-- [ ] Extend the framework for 3D image-to-image translation
+- [x] Extend the framework for 3D image-to-image translation ([pfriedri/cwdm](https://github.com/pfriedri/cwdm))
 
 ## Acknowledgements
 Our code is based on / inspired by the following repositories:
