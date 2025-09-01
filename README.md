@@ -129,7 +129,7 @@ All experiments were performed on a system with an AMD Epyc 7742 CPU and a NVIDI
 We plan to add further functionality to our framework:
 - [ ] Add compatibility for more datasets like MRNet, ADNI, or fastMRI
 - [x] Release pre-trained models
-- [ ] Extend the framework for 3D image inpainting
+- [x] Extend the framework for 3D image inpainting (see e.g. [AliciaDurrer/fastWDM3D](https://github.com/AliciaDurrer/fastWDM3D), or [AliciaDurrer/DM_Inpainting](https://github.com/AliciaDurrer/DM_Inpainting))
 - [x] Extend the framework for 3D image-to-image translation ([pfriedri/cwdm](https://github.com/pfriedri/cwdm))
 
 ## Acknowledgements
